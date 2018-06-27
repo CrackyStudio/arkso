@@ -1,0 +1,34 @@
+Version 3.2:
+- Automatic Backups added
+- Code optimisation (#Regions)
+
+Version 3.1:
+- English syntax optimisation
+- Aberration map added
+- NotifyIcon Settings optimisation (TurnON, TurnOFF, Get IP Address)
+- Custom Command Line Arguments & Options added
+
+Version 3.0:
+- Night Mode added
+- SleepMode & Hibernation disabled by default on server start.
+- SleepMode & Hibernation reseted by default on server stop.
+- Server Backups added
+- SteamCMD installer added
+
+Version 2.2:
+- Data loading fixed. You have no more longer to fill parameters everytime.
+
+Version 2.1:
+- Major code optimisation
+- Minor visual optimisation
+- ARKSO update notification optimisation
+- ARKSO update is now automatic
+- Get IP Address function added
+- Manual configuration for Game.ini and GameUserSettings.ini added
+
+Version 2.0:
+- Major code optimisation
+- ARKSO update notification added
+
+Version 1.0:
+- First Build

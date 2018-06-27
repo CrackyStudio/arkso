@@ -1,0 +1,43 @@
+What is the Actual Version?
+Version 3.2
+
+I want to submit a suggestion, where should I do?
+You can contact me at cracky.studio@gmail.com.
+
+It is planned to translate this freeware into the most common languages?
+Actually not. I'm not able to do that myself.
+
+Sometimes English syntax is incorrect, why?
+English is not my native language, I practise it every day but it is not perfect.
+
+The picture show that the server is ON but it is not showing up in servers list, why ?
+First, you will need to know that the picture go ON when 'ShooterGameServer.exe' process go ON.
+So, it can happen for some reasons:
+- The server is still in launching phase
+- You missed a launch setting
+- A launch setting has been badly filled
+- You got a problem with port opening
+
+It is possible to use this tool for multiple server instances?
+Not now. Not planned.
+
+It is planned to add a mod loader?
+Yes, I'll try.
+
+How to use a custom map? The Volcano for instance?
+Right now it's not possible.
+
+After the tool update, I got an error, why and what to do?
+Go on your Desktop. You have a new folder containing the updated app. You can delete the outdated app.
+
+I've the error "Could not start process ShooterGameServer.exe"
+That can happen for some reasons:
+- You choose the wrong path. You must choose the 'SteamCMD' path, not his container. You must fill the folder containing the 'SteamCMD.exe' file. 
+- Some files are damaged or missing. Redownload the server files.
+
+How to enable Custom Command Line Arguments & Options?
+Click on the little picture at right of the both textboxes.
+
+Where are stored backups?
+In your SteamCMD Folder, you should have a new folder called 'ARKSO - Server Backup'. In this folder, you have each backups stored by date & hours. AutoBackup is limited to one per day. 
+Be careful that your drive is not overdriven, in which case the backup will not be made. It is also possible that it causes a crash of ARKSO.
