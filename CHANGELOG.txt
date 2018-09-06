@@ -1,3 +1,11 @@
+Version 4.0:
+- Code completely reworked
+- Major code optimisation
+- Minor graphic optimisation
+- Real-time server status
+- Server PING included
+- ARKSO freeze reduced
+
 Version 3.2:
 - Automatic Backups added
 - Code optimisation (#Regions)
