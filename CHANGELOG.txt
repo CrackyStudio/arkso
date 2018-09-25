@@ -1,3 +1,6 @@
+Version 4.1:
+- Minor bug fixes (thanks to Daniel C. Fischer)
+
 Version 4.0:
 - Code completely reworked
 - Major code optimisation
