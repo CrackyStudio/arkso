@@ -1,5 +1,6 @@
 # ARK Server Organiser
 [![License](https://img.shields.io/github/license/CrackyStudio/arkso.svg)](https://github.com/CrackyStudio/arkso)
+
 ARK Server Organiser (ARKSO) works with SteamCMD to bring an interface to your dedicated server to make your server setup the easiest possible.
 
 ## Development
