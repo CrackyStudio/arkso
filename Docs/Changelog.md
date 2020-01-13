@@ -1,0 +1,57 @@
+﻿## Version 5.0 (actual version):
+- Code moved from vb.net to C#
+- App no longer detected as false positive
+- Added possibility to add maps in config files
+
+## Version 4.3:
+- Valguero_P map added 
+
+## Version 4.2:
+- Game.ini bug fixed
+- Extinction map added
+
+## Version 4.1:
+- Minor bug fixes (thanks to Daniel C. Fischer)
+
+## Version 4.0:
+- Code completely reworked
+- Major code optimisation
+- Minor graphic optimisation
+- Real-time server status
+- Server PING included
+- ARKSO freeze reduced
+
+## Version 3.2:
+- Automatic Backups added
+- Code optimisation (#Regions)
+
+## Version 3.1:
+- English syntax optimisation
+- Aberration map added
+- NotifyIcon Settings optimisation (TurnON, TurnOFF, Get IP Address)
+- Custom Command Line Arguments & Options added
+
+## Version 3.0:
+- Night Mode added
+- SleepMode & Hibernation disabled by default on server start.
+- SleepMode & Hibernation reseted by default on server stop.
+- Server Backups added
+- SteamCMD installer added
+
+## Version 2.2:
+- Data loading fixed. You have no more longer to fill parameters everytime.
+
+## Version 2.1:
+- Major code optimisation
+- Minor visual optimisation
+- ARKSO update notification optimisation
+- ARKSO update is now automatic
+- Get IP Address function added
+- Manual configuration for Game.ini and GameUserSettings.ini added
+
+## Version 2.0:
+- Major code optimisation
+- ARKSO update notification added
+
+## Version 1.0:
+- First Build
