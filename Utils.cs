@@ -194,10 +194,10 @@ namespace ARKSO
 
                 System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(delegate
                 {
-                    if (Graphics.Main.statusLabel.Content.ToString() != "Server is on")
+                    if (Graphics.Main.statusLabel.Content.ToString() != "ONLINE")
                     {
                         Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.Green);
-                        Graphics.Main.statusLabel.Content = "Server is on";
+                        Graphics.Main.statusLabel.Content = "ONLINE";
                     }
 
                     Graphics.Main.latencyLabel.Foreground = new SolidColorBrush(color);
