@@ -8,6 +8,7 @@ namespace ARKSO.Graphics
 {
     class Main
     {
+        public static Label donateLabel;
         public static Label versionLabel;
         public static Label nameLabel;
         public static TextBox nameTextbox;
@@ -37,6 +38,21 @@ namespace ARKSO.Graphics
         /// </summary>
         public static void Build(Grid AppGrid)
         {
+
+
+            // Donate control
+            donateLabel = new Label
+            {
+                Content = "$",
+                Width = 25,
+                Height = Double.NaN,
+                Foreground = new SolidColorBrush(Color.FromRgb(171, 173, 168)),
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Right,
+                HorizontalContentAlignment = HorizontalAlignment.Right,
+                Margin = new Thickness(0, 0, 25, 0),
+            };
+
             // Version control
             versionLabel = new Label
             {
@@ -349,6 +365,7 @@ namespace ARKSO.Graphics
             };
 
             // Add handlers
+            donateLabel.AddHandler(Button.PreviewMouseDownEvent, new RoutedEventHandler(MainWindow.Donate));
             nameTextbox.AddHandler(System.Windows.Controls.Primitives.TextBoxBase.TextChangedEvent, new RoutedEventHandler(Json.Update));
             mapCbb.AddHandler(System.Windows.Controls.Primitives.Selector.SelectionChangedEvent, new RoutedEventHandler(Json.UpdateMap));
             playersTextbox.AddHandler(UIElement.PreviewTextInputEvent, new TextCompositionEventHandler(Utils.TextBoxNumberValidation));
@@ -363,11 +380,13 @@ namespace ARKSO.Graphics
             updateButton.AddHandler(Button.ClickEvent, new RoutedEventHandler(MainWindow.UpdateServer));
 
             // Adjust window size
-            Application.Current.MainWindow.Width = 370;
-            AppGrid.Width = 371;
+            Application.Current.MainWindow.Width = 500;
+            Application.Current.MainWindow.Height = 550;
+            AppGrid.Width = 501;
             MainWindow.CenterApp();
 
             // Add controls
+            AppGrid.Children.Add(donateLabel);
             AppGrid.Children.Add(versionLabel);
             AppGrid.Children.Add(nameLabel);
             AppGrid.Children.Add(nameTextbox);
