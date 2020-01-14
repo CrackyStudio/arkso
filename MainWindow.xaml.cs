@@ -92,7 +92,7 @@ namespace ARKSO
         /// <summary>
         /// Donate via PayPal
         /// </summary>
-        private void Donate(object sender, RoutedEventArgs e)
+        public static void Donate(object sender, RoutedEventArgs e)
         {
             Process.Start("https://www.paypal.me/officialcracky/5");
         }

@@ -11,7 +11,6 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <BitmapImage x:Key="Donate" UriSource="Resources/Donate.png" />
         <Style x:Key="onHoverButton" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -88,12 +87,6 @@
                Background="#171a23" 
                Width="800"
                MouseDown="DragWindow"/>
-        <Image Source="{StaticResource Donate}" 
-               HorizontalAlignment="Right" 
-               VerticalAlignment="Bottom" 
-               Width="15"
-               Margin="0,0,30,430"
-               PreviewMouseDown="Donate"/>
         <Label Content="X" 
                HorizontalAlignment="Right" 
                VerticalAlignment="Top" 
