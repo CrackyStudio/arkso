@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -41,7 +40,7 @@ namespace ARKSO.Graphics
             // Version control
             versionLabel = new Label
             {
-                Content = "v5.0",
+                Content = MainWindow.currentVersion,
                 Height = Double.NaN,
                 Foreground = new SolidColorBrush(Color.FromRgb(171, 173, 168)),
                 VerticalAlignment = VerticalAlignment.Bottom,

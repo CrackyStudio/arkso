@@ -22,6 +22,7 @@ namespace ARKSO
         public static string arksoPath = Path.Combine(roamingPath, "ARK Server Organiser");
         public static string confPath = Path.Combine(arksoPath, "conf");
         public static string logsPath = Path.Combine(arksoPath, "logs");
+        public static string currentVersion;
 
         /// <summary>
         /// Load application

@@ -2,7 +2,6 @@
 using System;
 using System.IO;
 using System.Net;
-using System.Windows;
 
 namespace ARKSO
 {
@@ -17,7 +16,7 @@ namespace ARKSO
         {
             try
             {
-                string currentVersion = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
+                MainWindow.currentVersion = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
                 string latestVersion;
                 string html = string.Empty;
                 string URL = @"https://api.github.com/repos/CrackyStudio/arkso/releases/latest";
@@ -37,10 +36,10 @@ namespace ARKSO
 
                 json = Json.ParseString(html);
 
-                currentVersion = currentVersion.Substring(0, Math.Min(currentVersion.Length, 3));
+                MainWindow.currentVersion = MainWindow.currentVersion.Substring(0, Math.Min(MainWindow.currentVersion.Length, 3));
                 latestVersion = json["tag_name"].ToString().TrimStart('v');
 
-                double cv = double.Parse(currentVersion);
+                double cv = double.Parse(MainWindow.currentVersion);
                 double lv = double.Parse(latestVersion);
 
                 if (cv < lv)
