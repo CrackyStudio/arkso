@@ -54,6 +54,7 @@ namespace ARKSO
             } 
             catch (Exception ex)
             {
+                MainWindow.currentVersion = MainWindow.currentVersion.Substring(0, Math.Min(MainWindow.currentVersion.Length, 3));
                 Utils.Log($"{ex.Message}\n{ex.InnerException}", "ERROR");
                 return false;
             }
