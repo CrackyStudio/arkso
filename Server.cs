@@ -87,7 +87,7 @@ namespace ARKSO
         /// <summary>
         /// Returns external/public IP address
         /// </summary>
-        private static string GetIpAddress()
+        public static string GetIpAddress()
         {
             string url = "http://checkip.dyndns.org";
             WebRequest req = WebRequest.Create(url);
@@ -117,7 +117,7 @@ namespace ARKSO
             try
             {
                 /* Port must not be hard coded */
-                IPEndPoint server = new IPEndPoint(IPAddress.Parse(GetIpAddress()), 7777);
+                IPEndPoint server = new IPEndPoint(IPAddress.Parse(MainWindow.serverIP), 7777);
                 using (UdpClient client = new UdpClient())
                 {
                     client.Client.ReceiveTimeout = 100;
