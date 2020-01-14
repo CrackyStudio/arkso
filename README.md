@@ -21,6 +21,10 @@ Here is a list of all branches. You are on branch v5.0.
 | ------ | ------ | ------ |
 | v5.0 | [/v5.0][v5.0] | 01/13/2020 |
 
+## Wiki
+Wiki is available [here][wiki]
+
 [v5.0]: <https://github.com/CrackyStudio/arkso/tree/v5.0>
 [VDW]: <https://developer.valvesoftware.com/wiki/SteamCMD>
 [changelog]: <https://github.com/CrackyStudio/arkso/blob/v5.0/Docs/Changelog.md>
+[wiki]: <https://github.com/CrackyStudio/arkso/wiki>
