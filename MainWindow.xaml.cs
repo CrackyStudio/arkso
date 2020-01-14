@@ -23,6 +23,7 @@ namespace ARKSO
         public static string confPath = Path.Combine(arksoPath, "conf");
         public static string logsPath = Path.Combine(arksoPath, "logs");
         public static string currentVersion;
+        public static string serverIP;
 
         /// <summary>
         /// Load application
@@ -193,6 +194,7 @@ namespace ARKSO
                 Graphics.Installation.Build(Grid);         
             } else
             {
+                serverIP = Server.GetIpAddress();
                 Graphics.Main.Build(Grid);
             }
         }
@@ -227,7 +229,7 @@ namespace ARKSO
                 Graphics.Main.turnOnOffButton.Content = "Stop server";
                 Graphics.Main.updateButton.IsEnabled = false;
                 Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.Yellow);
-                Graphics.Main.statusLabel.Content = "Server is starting";
+                Graphics.Main.statusLabel.Content = "STARTING";
                 Server.Start();
                 serverTimer.Elapsed += new ElapsedEventHandler(Utils.OnTimedEvent);
                 serverTimer.Interval = 1000;
@@ -241,7 +243,7 @@ namespace ARKSO
                 Graphics.Main.turnOnOffButton.Content = "Start server";
                 Graphics.Main.updateButton.IsEnabled = true;
                 Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.Red);
-                Graphics.Main.statusLabel.Content = "Server is off";
+                Graphics.Main.statusLabel.Content = "STARTING";
                 Graphics.Main.latencyLabel.Content = "";
                 Graphics.Main.latencyLabel.Foreground = new SolidColorBrush(Colors.Black);
             }
@@ -303,6 +305,14 @@ namespace ARKSO
                 Utils.Log(ex.Message, "ERROR");
                 Application.Current.Shutdown();
             }
+        }
+
+        /// <summary>
+        /// Share server (copy to clipboard)
+        /// </summary>
+        public static void ShareServer(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText($"Join me on my ARK Survival Evolved server at {serverIP}:{Json.GetProperty(Json.serverJson, "port")}");
         }
     }
 }
