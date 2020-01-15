@@ -10,6 +10,8 @@ namespace ARKSO
 {
     class Server
     {
+        public static ProcessWindowStyle consoleStyle = ProcessWindowStyle.Hidden;
+
         public static Process serverProcess;
         /// <summary>
         /// Start server
@@ -24,7 +26,7 @@ namespace ARKSO
 
                 ProcessStartInfo pInfo = new ProcessStartInfo(SGSPath)
                 {
-                    WindowStyle = ProcessWindowStyle.Hidden,
+                    WindowStyle = consoleStyle,
                     Arguments = $"\"{Json.GetProperty(Json.serverJson, "map")}?listen?SessionName={Json.GetProperty(Json.serverJson, "name")}?ServerAdminPassword={Json.GetProperty(Json.serverJson, "admin_password")}?ServerPassword={Json.GetProperty(Json.serverJson, "password")}?Port={Json.GetProperty(Json.serverJson, "port")}?QueryPort={Json.GetProperty(Json.serverJson, "query_port")}?MaxPlayers={Json.GetProperty(Json.serverJson, "players")}{Json.GetProperty(Json.serverJson, "options")}\" -{Json.GetProperty(Json.serverJson, "vac")} -{Json.GetProperty(Json.serverJson, "battleye")} {Json.GetProperty(Json.serverJson, "arguments")}"
                 };
                 serverProcess = Process.Start(pInfo);
