@@ -194,6 +194,7 @@ namespace ARKSO
                 Graphics.Installation.Build(Grid);         
             } else
             {
+                Json.IsJsonIso();
                 serverIP = Server.GetIpAddress();
                 Graphics.Main.Build(Grid);
             }
@@ -243,7 +244,7 @@ namespace ARKSO
                 Graphics.Main.turnOnOffButton.Content = "Start server";
                 Graphics.Main.updateButton.IsEnabled = true;
                 Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.Red);
-                Graphics.Main.statusLabel.Content = "STARTING";
+                Graphics.Main.statusLabel.Content = "OFFLINE";
                 Graphics.Main.latencyLabel.Content = "";
                 Graphics.Main.latencyLabel.Foreground = new SolidColorBrush(Colors.Black);
             }
