@@ -1,12 +1,14 @@
 ﻿using IWshRuntimeLibrary;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Timers;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Threading;
 
 namespace ARKSO
 {
@@ -205,6 +207,19 @@ namespace ARKSO
 
                 }));
             }           
+        }
+
+        /// <summary>
+        /// Edit config files
+        /// </summary>
+        public static void EditFile(object sender, RoutedEventArgs e)
+        {
+            var control = (Button)sender;
+            var controlName = control.Name;
+            string steamCMDPath = System.IO.File.ReadAllText(Path.Combine(MainWindow.confPath, "steamcmd.aso"));
+            steamCMDPath = steamCMDPath.Remove(steamCMDPath.Length - 13);
+            string file = $"{steamCMDPath}\\steamapps\\common\\ARK Survival Evolved Dedicated Server\\ShooterGame\\Saved\\Config\\WindowsServer\\{controlName}.ini";
+            Process.Start(file);
         }
     }
 }
