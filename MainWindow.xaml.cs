@@ -24,6 +24,7 @@ namespace ARKSO
         public static string logsPath = Path.Combine(arksoPath, "logs");
         public static string currentVersion;
         public static string serverIP;
+        public static int serverPort;
 
         /// <summary>
         /// Load application
@@ -232,6 +233,7 @@ namespace ARKSO
                 Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.Yellow);
                 Graphics.Main.statusLabel.Content = "STARTING";
                 Server.Start();
+                serverPort = int.Parse(Json.GetProperty(Json.serverJson, "port"));
                 serverTimer.Elapsed += new ElapsedEventHandler(Utils.OnTimedEvent);
                 serverTimer.Interval = 1000;
                 serverTimer.Enabled = true;
