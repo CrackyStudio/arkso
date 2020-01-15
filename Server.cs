@@ -124,8 +124,7 @@ namespace ARKSO
         {
             try
             {
-                /* Port must not be hard coded */
-                IPEndPoint server = new IPEndPoint(IPAddress.Parse(MainWindow.serverIP), 7777);
+                IPEndPoint server = new IPEndPoint(IPAddress.Parse(MainWindow.serverIP), MainWindow.serverPort);
                 using (UdpClient client = new UdpClient())
                 {
                     client.Client.ReceiveTimeout = 100;
@@ -159,6 +158,14 @@ namespace ARKSO
             var control = (CheckBox)sender;
             var isChecked = control.IsChecked;
             Json.Update(Json.serverJson, "hide_console", isChecked.ToString());
+        }
+
+        /// <summary>
+        /// Backup server data
+        /// </summary>
+        public static void Backup(object sender, RoutedEventArgs e)
+        {
+            /* ToDo */
         }
     }
 }
