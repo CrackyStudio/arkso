@@ -5,12 +5,13 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace ARKSO
 {
     class Server
     {
-        public static ProcessWindowStyle consoleStyle = ProcessWindowStyle.Hidden;
+        public static ProcessWindowStyle consoleStyle = ProcessWindowStyle.Normal;
 
         public static Process serverProcess;
         /// <summary>
@@ -23,6 +24,11 @@ namespace ARKSO
                 string steamCMDPath = File.ReadAllText(Path.Combine(MainWindow.confPath, "steamcmd.aso"));
                 steamCMDPath = steamCMDPath.Remove(steamCMDPath.Length - 13);
                 string SGSPath = steamCMDPath + "\\steamapps\\common\\ARK Survival Evolved Dedicated Server\\ShooterGame\\Binaries\\Win64\\ShooterGameServer.exe";
+
+                if (bool.Parse(Json.GetProperty(Json.serverJson, "hide_console")))
+                {
+                    consoleStyle = ProcessWindowStyle.Hidden;
+                }
 
                 ProcessStartInfo pInfo = new ProcessStartInfo(SGSPath)
                 {
@@ -143,6 +149,16 @@ namespace ARKSO
                 }
                 return "--";
             }
+        }
+
+        /// <summary>
+        /// Set server console property to visible or hidden
+        /// </summary>
+        public static void HideConsole(object sender, RoutedEventArgs e)
+        {
+            var control = (CheckBox)sender;
+            var isChecked = control.IsChecked;
+            Json.Update(Json.serverJson, "hide_console", isChecked.ToString());
         }
     }
 }
