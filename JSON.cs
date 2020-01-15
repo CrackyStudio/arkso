@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -87,6 +84,10 @@ namespace ARKSO
             var control = (TextBox)sender;
             var controlName = control.Name;
             Update(serverJson, controlName, control.Text);
+            if (controlName == "port")
+            {
+                Graphics.Main.addressLabel.Content = $"{MainWindow.serverIP}:{control.Text}";
+            }
         }
 
         /// <summary>
@@ -192,6 +193,28 @@ namespace ARKSO
         public static JObject ParseString(string str)
         {
             return JObject.Parse(str);
+        }
+
+        /// <summary>
+        /// Check if Json contains all required fields
+        /// </summary>
+        public static void IsJsonIso()
+        {
+            JObject serverConf = Read(serverJson);
+            string[] keys = { "name", "map", "players", "vac", "battleye", "password", "admin_password", "port", "query_port", "arguments", "options", "hide_console" };
+            foreach (string key in keys)
+            {
+                if (!serverConf.ContainsKey(key))
+                {
+                    if (key == "hide_console")
+                    {
+                        Update(serverJson, key, "false");
+                    } else
+                    {
+                        Update(serverJson, key, "");
+                    }                
+                }
+            }
         }
     }
 }
