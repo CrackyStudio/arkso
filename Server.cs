@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ARKSO
 {
@@ -165,7 +166,26 @@ namespace ARKSO
         /// </summary>
         public static void Backup(object sender, RoutedEventArgs e)
         {
-            /* ToDo */
+            /* Disable backup if server is started */
+            string date = DateTime.Now.ToString("yyyy.MM.dd - HH.mm");
+            string steamCMDPath = File.ReadAllText(Path.Combine(MainWindow.confPath, "steamcmd.aso"));
+            steamCMDPath = steamCMDPath.Remove(steamCMDPath.Length - 13);
+            DirectoryInfo serverData = new DirectoryInfo($"{steamCMDPath}\\steamapps\\common\\ARK Survival Evolved Dedicated Server\\ShooterGame\\Saved");          
+            DirectoryInfo backupFolder = new DirectoryInfo($"{MainWindow.arksoPath}\\backups\\{date}");      
+
+            Graphics.Main.turnOnOffButton.IsEnabled = false;
+            Graphics.Main.updateButton.IsEnabled = false;
+            Graphics.Main.backupButton.IsEnabled = false;
+            Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.AliceBlue);
+            Graphics.Main.statusLabel.Content = "UPDATE"; 
+            
+            Utils.CopyFilesRecursively(serverData, backupFolder);
+
+            Graphics.Main.turnOnOffButton.IsEnabled = true;
+            Graphics.Main.updateButton.IsEnabled = true;
+            Graphics.Main.backupButton.IsEnabled = true;
+            Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.Red);
+            Graphics.Main.statusLabel.Content = "OFFLINE";
         }
     }
 }
