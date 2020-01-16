@@ -599,8 +599,7 @@ namespace ARKSO.Graphics
                 Padding = new Thickness(5, 5, 5, 5),
                 HorizontalContentAlignment = HorizontalAlignment.Center,
                 BorderBrush = new SolidColorBrush(Colors.LightGray),
-                Style = (Style)Application.Current.Resources["onHoverButton"],
-                IsEnabled = false
+                Style = (Style)Application.Current.Resources["onHoverButton"]
             };
 
             // Credits
@@ -638,6 +637,7 @@ namespace ARKSO.Graphics
             gameIniButton.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Utils.EditFile));
             gameUserSettingsIniButton.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Utils.EditFile));
             hideConsoleCheckbox.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Server.HideConsole));
+            backupButton.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Server.Backup));
 
             // Adjust window size
             Application.Current.MainWindow.Width = 500;
