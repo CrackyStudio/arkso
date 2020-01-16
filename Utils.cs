@@ -221,5 +221,19 @@ namespace ARKSO
             string file = $"{steamCMDPath}\\steamapps\\common\\ARK Survival Evolved Dedicated Server\\ShooterGame\\Saved\\Config\\WindowsServer\\{controlName}.ini";
             Process.Start(file);
         }
+
+        /// <summary>
+        /// Copy all files and folders
+        /// </summary>
+        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)
+        {
+            if (!Directory.Exists(target.FullName))
+            {
+                foreach (DirectoryInfo dir in source.GetDirectories())
+                    CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
+                foreach (FileInfo file in source.GetFiles())
+                    file.CopyTo(Path.Combine(target.FullName, file.Name));
+            }               
+        }
     }
 }
