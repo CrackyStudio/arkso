@@ -16,6 +16,7 @@ namespace ARKSO
             new JProperty("query_port", "7778"),
             new JProperty("arguments", ""),
             new JProperty("options", ""),
+            new JProperty("auto_und", "False"),
             new JProperty("hide_console", "False"));
 
         public static JObject maps = new JObject(
