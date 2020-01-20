@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Xceed.Wpf.Toolkit;
 
 namespace ARKSO.Graphics
 {
@@ -48,6 +49,8 @@ namespace ARKSO.Graphics
         public static Button gameUserSettingsIniButton;
 
         public static Label managementBox;
+        public static CheckBox autoBnU;
+        public static TimeSpanUpDown autoUnBTime;
         public static CheckBox hideConsoleCheckbox;
 
         public static Label actionBox;
@@ -532,8 +535,41 @@ namespace ARKSO.Graphics
                 Margin = new Thickness(10, 365, 10, 0),
             };
 
+            autoBnU = new CheckBox
+            {
+                Name = "auto_unb",
+                Content = "Automatic backup and update",
+                IsChecked = bool.Parse(Json.GetProperty(Json.serverJson, "auto_unb")),
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Foreground = new SolidColorBrush(Color.FromRgb(171, 173, 168)),
+                Margin = new Thickness(25, 375, 10, 0),
+            };
+
+            autoUnBTime = new TimeSpanUpDown
+            {
+                Name = "auto_unb_time",
+                Width = 55,
+                Height = 22,
+                Background = new SolidColorBrush(Color.FromRgb(48, 65, 87)),
+                Foreground = new SolidColorBrush(Color.FromRgb(171, 173, 168)),
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Margin = new Thickness(220, 371, 0, 0),
+                Padding = new Thickness(0, 1.5, 0, 0),
+                AllowTextInput = false,
+                ShowDays = false,
+                ShowSeconds = false,
+                Maximum = new TimeSpan(0, 24, 0, 0),
+                Minimum = new TimeSpan(0, 0, 0, 0),
+                CurrentDateTimePart = DateTimePart.Hour24,
+                TextAlignment = TextAlignment.Center,
+                Value = Server.GetUpdateTime()
+            };
+
             hideConsoleCheckbox = new CheckBox
             {
+                Name = "hide_console",
                 Content = "Hide server console",
                 IsChecked = bool.Parse(Json.GetProperty(Json.serverJson, "hide_console")),
                 VerticalAlignment = VerticalAlignment.Top,
@@ -636,8 +672,10 @@ namespace ARKSO.Graphics
             updateButton.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(MainWindow.UpdateServer));
             gameIniButton.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Utils.EditFile));
             gameUserSettingsIniButton.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Utils.EditFile));
-            hideConsoleCheckbox.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Server.HideConsole));
+            hideConsoleCheckbox.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Server.UpdateCheckbox));
+            autoBnU.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Server.UpdateCheckbox));
             backupButton.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Server.Backup));
+            autoUnBTime.AddHandler(TimeSpanUpDown.ValueChangedEvent, new RoutedEventHandler(Utils.TimePicker));
 
             // Adjust window size
             Application.Current.MainWindow.Width = 500;
@@ -686,6 +724,8 @@ namespace ARKSO.Graphics
             AppGrid.Children.Add(gameUserSettingsIniButton);
 
             AppGrid.Children.Add(managementBox);
+            AppGrid.Children.Add(autoBnU);
+            AppGrid.Children.Add(autoUnBTime);
             AppGrid.Children.Add(hideConsoleCheckbox);
 
             AppGrid.Children.Add(actionBox);
