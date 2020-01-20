@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Xceed.Wpf.Toolkit;
 
 namespace ARKSO
 {
@@ -166,10 +167,19 @@ namespace ARKSO
         }
 
         /// <summary>
-        /// Timer to get server latency
+        /// App timer
         /// </summary>
         public static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
+            bool autoUnB = bool.Parse(Json.GetProperty(Json.serverJson, "auto_unb"));
+            string updateTime = Json.GetProperty(Json.serverJson, "auto_unb_time");
+            string currentTime = DateTime.Now.ToString("hh:mm:ss");
+
+            if (autoUnB && $"{updateTime}:00" == currentTime)
+            {
+                Server.AutoBackupNUpdate();
+            }
+
             dynamic latency = Server.GetLatency();
             Color color = Colors.Black;
 
@@ -194,7 +204,7 @@ namespace ARKSO
                         break;
                 }
 
-                System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(delegate
+                Application.Current.Dispatcher.BeginInvoke(new Action(delegate
                 {
                     if (Graphics.Main.statusLabel.Content.ToString() != "ONLINE")
                     {
@@ -225,15 +235,29 @@ namespace ARKSO
         /// <summary>
         /// Copy all files and folders
         /// </summary>
-        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)
+        public static void CopyFilesRecursively(string source, string target)
         {
-            if (!Directory.Exists(target.FullName))
+            if (!Directory.Exists(new DirectoryInfo(target).FullName))
             {
-                foreach (DirectoryInfo dir in source.GetDirectories())
-                    CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
-                foreach (FileInfo file in source.GetFiles())
-                    file.CopyTo(Path.Combine(target.FullName, file.Name));
+                foreach (string dirPath in Directory.GetDirectories(source, "*",
+                    SearchOption.AllDirectories))
+                    Directory.CreateDirectory(dirPath.Replace(source, target));
+
+                foreach (string newPath in Directory.GetFiles(source, "*.*",
+                    SearchOption.AllDirectories))
+                    System.IO.File.Copy(newPath, newPath.Replace(source, target), true);
             }               
+        }
+
+        /// <summary>
+        /// Textbox content is valided only if is number
+        /// </summary>
+        public static void TimePicker(object sender, RoutedEventArgs e)
+        {
+            var control = (TimeSpanUpDown)sender;
+            var controlValue = control.Value.ToString();
+            var value = controlValue.Remove(controlValue.Length - 3);
+            Json.Update(Json.serverJson, "auto_unb_time", value);
         }
     }
 }
