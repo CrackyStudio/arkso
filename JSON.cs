@@ -201,7 +201,7 @@ namespace ARKSO
         public static void IsJsonIso()
         {
             JObject serverConf = Read(serverJson);
-            string[] keys = { "name", "map", "players", "vac", "battleye", "password", "admin_password", "port", "query_port", "arguments", "options", "hide_console", "auto_unb" };
+            string[] keys = { "name", "map", "players", "vac", "battleye", "password", "admin_password", "port", "query_port", "arguments", "options", "hide_console", "auto_unb", "auto_unb_time" };
             foreach (string key in keys)
             {
                 if (!serverConf.ContainsKey(key))
