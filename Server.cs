@@ -55,9 +55,11 @@ namespace ARKSO
             {
                 Process[] proc = Process.GetProcessesByName("ShooterGameServer");
 
-                proc[0].Kill();
-
-                Utils.Log("Server stopped", "OK");
+                if (proc.Length > 0)
+                {
+                    proc[0].Kill();
+                    Utils.Log("Server stopped", "OK");
+                }                                 
             }
             catch (Exception ex)
             {
@@ -77,6 +79,8 @@ namespace ARKSO
                 {
                     Graphics.Main.turnOnOffButton.IsEnabled = false;
                     Graphics.Main.updateButton.IsEnabled = false;
+                    Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.DeepSkyBlue);
+                    Graphics.Main.statusLabel.Content = "UPDATING";
                 }));
                 
                 ProcessStartInfo pInfo = new ProcessStartInfo($"{File.ReadAllText(Path.Combine(MainWindow.confPath, "steamcmd.aso"))}")
@@ -92,6 +96,8 @@ namespace ARKSO
                 {
                     Graphics.Main.turnOnOffButton.IsEnabled = true;
                     Graphics.Main.updateButton.IsEnabled = true;
+                    Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.Red);
+                    Graphics.Main.statusLabel.Content = "OFFLINE";
                 }));            
             }
             catch (Exception ex)
@@ -194,8 +200,8 @@ namespace ARKSO
                 Graphics.Main.turnOnOffButton.IsEnabled = false;
                 Graphics.Main.updateButton.IsEnabled = false;
                 Graphics.Main.backupButton.IsEnabled = false;
-                Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.AliceBlue);
-                Graphics.Main.statusLabel.Content = "UPDATE";
+                Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.DeepSkyBlue);
+                Graphics.Main.statusLabel.Content = "BACKUP";
             }));
 
 
