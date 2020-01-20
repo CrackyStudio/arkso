@@ -73,8 +73,12 @@ namespace ARKSO
         {
             try
             {
-                Graphics.Main.turnOnOffButton.IsEnabled = false;
-                Graphics.Main.updateButton.IsEnabled = false;
+                Application.Current.Dispatcher.BeginInvoke(new Action(delegate
+                {
+                    Graphics.Main.turnOnOffButton.IsEnabled = false;
+                    Graphics.Main.updateButton.IsEnabled = false;
+                }));
+                
                 ProcessStartInfo pInfo = new ProcessStartInfo($"{File.ReadAllText(Path.Combine(MainWindow.confPath, "steamcmd.aso"))}")
                 {
                     Arguments = "+login anonymous +app_update 376030 +quit"
@@ -83,8 +87,12 @@ namespace ARKSO
                 /* WaitForExit() Is freezing graphics */
                 p.WaitForExit();   
                 Utils.Log("Server has been updated", "OK");
-                Graphics.Main.turnOnOffButton.IsEnabled = true;
-                Graphics.Main.updateButton.IsEnabled = true;
+
+                Application.Current.Dispatcher.BeginInvoke(new Action(delegate
+                {
+                    Graphics.Main.turnOnOffButton.IsEnabled = true;
+                    Graphics.Main.updateButton.IsEnabled = true;
+                }));            
             }
             catch (Exception ex)
             {
@@ -154,11 +162,11 @@ namespace ARKSO
         /// <summary>
         /// Set server console property to visible or hidden
         /// </summary>
-        public static void HideConsole(object sender, RoutedEventArgs e)
+        public static void UpdateCheckbox(object sender, RoutedEventArgs e)
         {
             var control = (CheckBox)sender;
             var isChecked = control.IsChecked;
-            Json.Update(Json.serverJson, "hide_console", isChecked.ToString());
+            Json.Update(Json.serverJson, control.Name, isChecked.ToString());
         }
 
         /// <summary>
@@ -166,26 +174,68 @@ namespace ARKSO
         /// </summary>
         public static void Backup(object sender, RoutedEventArgs e)
         {
+            Backup();
+        }
+
+        /// <summary>
+        /// Backup server data
+        /// </summary>
+        public static void Backup()
+        {
             /* Disable backup if server is started */
             string date = DateTime.Now.ToString("yyyy.MM.dd - HH.mm");
             string steamCMDPath = File.ReadAllText(Path.Combine(MainWindow.confPath, "steamcmd.aso"));
             steamCMDPath = steamCMDPath.Remove(steamCMDPath.Length - 13);
-            DirectoryInfo serverData = new DirectoryInfo($"{steamCMDPath}\\steamapps\\common\\ARK Survival Evolved Dedicated Server\\ShooterGame\\Saved");          
-            DirectoryInfo backupFolder = new DirectoryInfo($"{MainWindow.arksoPath}\\backups\\{date}");      
+            string serverData = $"{steamCMDPath}\\steamapps\\common\\ARK Survival Evolved Dedicated Server\\ShooterGame\\Saved";
+            string backupFolder = $"{MainWindow.arksoPath}\\backups\\{date}";
 
-            Graphics.Main.turnOnOffButton.IsEnabled = false;
-            Graphics.Main.updateButton.IsEnabled = false;
-            Graphics.Main.backupButton.IsEnabled = false;
-            Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.AliceBlue);
-            Graphics.Main.statusLabel.Content = "UPDATE"; 
-            
+            Application.Current.Dispatcher.BeginInvoke(new Action(delegate
+            {
+                Graphics.Main.turnOnOffButton.IsEnabled = false;
+                Graphics.Main.updateButton.IsEnabled = false;
+                Graphics.Main.backupButton.IsEnabled = false;
+                Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.AliceBlue);
+                Graphics.Main.statusLabel.Content = "UPDATE";
+            }));
+
+
             Utils.CopyFilesRecursively(serverData, backupFolder);
 
-            Graphics.Main.turnOnOffButton.IsEnabled = true;
-            Graphics.Main.updateButton.IsEnabled = true;
-            Graphics.Main.backupButton.IsEnabled = true;
-            Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.Red);
-            Graphics.Main.statusLabel.Content = "OFFLINE";
+            Application.Current.Dispatcher.BeginInvoke(new Action(delegate
+            {
+                Graphics.Main.turnOnOffButton.IsEnabled = true;
+                Graphics.Main.updateButton.IsEnabled = true;
+                Graphics.Main.backupButton.IsEnabled = true;
+                Graphics.Main.statusLabel.Foreground = new SolidColorBrush(Colors.Red);
+                Graphics.Main.statusLabel.Content = "OFFLINE";
+            }));
+        }
+
+        /// <summary>
+        /// Backup and Update server automatically
+        /// </summary>
+        public static void AutoBackupNUpdate()
+        {
+            Stop();
+            Backup();
+            Update();
+            Start();
+        }
+
+        /// <summary>
+        /// Get update time
+        /// </summary>
+        public static TimeSpan GetUpdateTime()
+        {
+            string time = Json.GetProperty(Json.serverJson, "auto_unb_time");
+            if (time != "")
+            {
+                int hours = int.Parse(time.Split(':')[0]);
+                int minutes = int.Parse(time.Split(':')[1]);
+
+                return new TimeSpan(0, hours, minutes, 0);
+            }
+            return new TimeSpan(0, 0, 0, 0);
         }
     }
 }
