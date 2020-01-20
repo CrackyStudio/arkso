@@ -67,6 +67,8 @@ namespace ARKSO.Graphics
             Grid.Children.Remove(Graphics.Main.gameUserSettingsIniButton);
             Grid.Children.Remove(Graphics.Main.managementBox);
             Grid.Children.Remove(Graphics.Main.hideConsoleCheckbox);
+            Grid.Children.Remove(Graphics.Main.autoBnU);
+            Grid.Children.Remove(Graphics.Main.autoUnBTime);
             Grid.Children.Remove(Graphics.Main.actionBox);
             Grid.Children.Remove(Graphics.Main.turnOnOffButton);
             Grid.Children.Remove(Graphics.Main.updateButton);
