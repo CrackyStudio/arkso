@@ -22,14 +22,15 @@ Here is a list of all branches. You are on branch v5.0.
 
 | Branch | URL | Release Date |
 | ------ | ------ | ------ |
-| v5.0 | [/v5.0][v5.0] | 01/13/2020 |
 | v5.1 | [/v5.1][v5.1] | 01/20/2020 |
+| v5.0 | [/v5.0][v5.0] | 01/13/2020 |
+
 
 ## Wiki
 Wiki is available [here][wiki]
 
-[v5.0]: <https://github.com/CrackyStudio/arkso/tree/v5.0>
 [v5.1]: <https://github.com/CrackyStudio/arkso/tree/v5.1>
+[v5.0]: <https://github.com/CrackyStudio/arkso/tree/v5.0>
 [VDW]: <https://developer.valvesoftware.com/wiki/SteamCMD>
 [changelog]: <https://github.com/CrackyStudio/arkso/blob/v5.1/Docs/Changelog.md>
 [wiki]: <https://github.com/CrackyStudio/arkso/wiki>
