@@ -173,7 +173,7 @@ namespace ARKSO
         {
             bool autoUnB = bool.Parse(Json.GetProperty(Json.serverJson, "auto_unb"));
             string updateTime = Json.GetProperty(Json.serverJson, "auto_unb_time");
-            string currentTime = DateTime.Now.ToString("hh:mm:ss");
+            string currentTime = DateTime.Now.ToString("HH:mm:ss");
 
             if (autoUnB && $"{updateTime}:00" == currentTime)
             {
