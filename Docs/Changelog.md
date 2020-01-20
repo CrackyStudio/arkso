@@ -1,7 +1,11 @@
-﻿## Version 5.0 (actual version):
+﻿## Version 5.1 (actual version):
+ - Bring back all components & functions available previously
+ 
+ ## Version 5.0:
 - Code moved from vb.net to C#
 - App no longer detected as false positive
 - Added possibility to add maps in config files
+- Some components & functions are missing
 
 ## Version 4.3:
 - Valguero_P map added 
