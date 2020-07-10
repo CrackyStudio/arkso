@@ -18,7 +18,7 @@ The Steam Console Client or SteamCMD is a command-line version of the Steam clie
 Learn More on [Valve Developer Website][VDW]
 
 ## Branches
-Here is a list of all branches. You are on branch v5.0.
+Here is a list of all branches. You are on branch v5.1.
 
 | Branch | URL | Release Date |
 | ------ | ------ | ------ |
